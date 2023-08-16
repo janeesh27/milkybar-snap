@@ -1,4 +1,16 @@
+"use client";
+import { useState } from "react";
+import PopupContent from "./Components/PopupContent";
 export default function Home() {
+  const [showPopup, setShowPopup] = useState(false);
+  const openPopup = () => {
+    setShowPopup(true);
+  };
+
+  const closePopup = () => {
+    setShowPopup(false);
+  };
+
   return (
     <div className="bg-[#FAEA18] h-[100vh] overflow-y-hidden">
       <div className="grid grid-rows-1 grid-cols-[minmax(0,6fr)_minmax(0,4fr)] pt-6">
@@ -15,22 +27,25 @@ export default function Home() {
           </div>
         </div>
       </div>
-
       <div className="bg-[url('/background.png')] absolute grid ">
         <div className="pl-4">
-          <input
-            id="cameraInput"
-            type="file"
-            accept="image/*"
-            capture="environment"
-            style={{ display: "none" }}
-          />
-          <img src="heroimage.png" alt="passport"></img>
+          <img
+            className="-z-[1]"
+            src="heroimage.png"
+            alt="passport"
+            onClick={openPopup}
+            style={{ cursor: "pointer" }}
+          ></img>
         </div>
         <div className="grid grid-cols-2 pl-4">
           <img src="/download.png"></img>
         </div>
-      </div>
+      </div>{" "}
+      {showPopup && (
+        <div className="z-[9999] w-full fixed">
+          <PopupContent onClose={closePopup} />
+        </div>
+      )}
     </div>
   );
 }

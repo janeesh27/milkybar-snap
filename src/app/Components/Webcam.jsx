@@ -5,7 +5,7 @@ const WebcamComponent = () => <Webcam />;
 
 const videoConstraints = {
   width: 314,
-  height: 365,
+  height: 315,
   facingMode: "user",
 };
 
@@ -16,6 +16,8 @@ export const WebcamCapture = () => {
   const capture = React.useCallback(() => {
     const imageSrc = webcamRef.current.getScreenshot();
     setImage(imageSrc);
+
+    localStorage.setItem("capturedImage", imageSrc);
   });
 
   return (
@@ -24,7 +26,7 @@ export const WebcamCapture = () => {
         {image == "" ? (
           <Webcam
             audio={false}
-            height={365}
+            height={315}
             ref={webcamRef}
             screenshotFormat="image/jpeg"
             width={314}
@@ -34,15 +36,16 @@ export const WebcamCapture = () => {
           <img src={image} />
         )}
       </div>
-      <div>
+      <div className="absolute">
         {image != "" ? (
           <button
             onClick={(e) => {
               e.preventDefault();
               setImage("");
             }}
+            className="relative text-red-600 bottom-[5rem] left-[8rem]"
           >
-            <img scr="/retakebutton.png" />
+            <img src="/retakebutton.png" />
           </button>
         ) : (
           <button
@@ -50,9 +53,9 @@ export const WebcamCapture = () => {
               e.preventDefault();
               capture();
             }}
+            className="relative text-red-600 bottom-[5rem] left-[8rem]"
           >
-            <img scr="/shutterbutton.png" />
-            yoo
+            <img src="/shutterbutton.png" />
           </button>
         )}
       </div>

@@ -11,6 +11,7 @@ const PopupContent = ({ onClose }) => {
     const isValid = /^[a-zA-Z]*$/.test(inputValue) && inputValue.length <= 30;
     setFirstName(inputValue);
     setIsValidFirstName(isValid);
+    localStorage.setItem("enteredName", inputValue);
   };
 
   const closePopup = () => {

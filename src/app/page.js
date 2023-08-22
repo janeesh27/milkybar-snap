@@ -1,8 +1,10 @@
 "use client";
 import { useState } from "react";
 import PopupContent from "./Components/PopupContent";
+import ProfilePicture from "./Components/ProfilePicture";
 export default function Home() {
   const [showPopup, setShowPopup] = useState(false);
+  const [showDP, setShowDP] = useState("");
   const openPopup = () => {
     setShowPopup(true);
   };
@@ -40,10 +42,15 @@ export default function Home() {
         <div className="grid grid-cols-2 pl-4">
           <img src="/download.png"></img>
         </div>
-      </div>{" "}
+        <div className="absolute">
+          <div className="h-[115px] w-[30%] relative top-[8rem] left-[6rem] transform rotate-[11.775deg]">
+            <ProfilePicture showDP={showDP} />
+          </div>
+        </div>
+      </div>
       {showPopup && (
         <div className="z-[9999] w-full fixed">
-          <PopupContent onClose={closePopup} />
+          <PopupContent onClose={closePopup} setShowDP={setShowDP} />
         </div>
       )}
     </div>

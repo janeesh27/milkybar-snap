@@ -9,14 +9,14 @@ const videoConstraints = {
   facingMode: "user",
 };
 
-export const WebcamCapture = () => {
+export const WebcamCapture = ({ setShowDP }) => {
   const [image, setImage] = useState("");
   const webcamRef = React.useRef(null);
 
   const capture = React.useCallback(() => {
     const imageSrc = webcamRef.current.getScreenshot();
     setImage(imageSrc);
-
+    setShowDP(imageSrc);
     localStorage.setItem("capturedImage", imageSrc);
   });
 
